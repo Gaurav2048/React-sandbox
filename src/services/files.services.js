@@ -24,6 +24,26 @@ const isFolder = (rootDir, location) => {
 // process.nextTick(() => {
 // })
 
+const getFolderContent = (obj, root, path) => {
+    const res = fs.readdirSync(`${root}${path ? `/${path}`: ''}`)
+    
+    res.forEach(loc => {
+        if (isFolder(`${root}${path ? `/${path}`: ''}`, loc)) {
+            getFolderContent(obj, root, `${path}/${loc}`)
+        } else {
+            obj[`${path}/${loc}`] = readFile(`${root}/${path}/${loc}`)
+        }
+    })
+}
+
+const readFile = (path) => {
+    if(fs.existsSync(path)) {
+        const content = fs.readFileSync(path, 'utf-8')
+        return content
+    }
+}
+
 module.exports = {
-    getFolderConstruct
+    getFolderConstruct,
+    getFolderContent
 }

@@ -9,7 +9,7 @@ const CodeEditor: React.FC<OwnProps> = ({ code }) => {
   return (
     <Editor
       height="100vh"
-      width="100vw"
+      width="100%"
       language="javascript"
       theme="vs-dark"
       value={code}
@@ -18,7 +18,7 @@ const CodeEditor: React.FC<OwnProps> = ({ code }) => {
         fontSize: "16px",
         formatOnType: true,
         autoClosingBrackets: true,
-        minimap: { scale: 10 }
+        minimap: { enabled: false }
       }}
     />
   );

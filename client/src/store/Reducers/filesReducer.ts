@@ -6,6 +6,11 @@ export type ActionType = {
         files: any
     }
 } | {
+    type: 'GET_PROJECT_CONSTRUCT',
+    payload: {
+        files: any
+    }
+} | {
     type: 'GET_FILE',
     payload: any;
 } | {
@@ -19,7 +24,8 @@ export type ActionType = {
 }
 
 const initialStore: FileStore = {
-    project: {}
+    project: {},
+    construct: {}
 }
 
 export const FileReducer: Reducer<FileStore, ActionType> = (state = initialStore, action) => {
@@ -30,6 +36,8 @@ export const FileReducer: Reducer<FileStore, ActionType> = (state = initialStore
       case 'GET_PROJECT' :
         return { ...state, project: action.payload };
       //else the current state is retained
+      case 'GET_PROJECT_CONSTRUCT': 
+      return { ...state,  construct: action.payload}
       default:
         return state;
     }

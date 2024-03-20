@@ -39,7 +39,8 @@ declare type ReduxApiAction = {
 
 
 declare type FileStore = {
-    project: Record<string, string>
+    project: Record<string, string>,
+    construct: Record<string, any>,
 }
 
 

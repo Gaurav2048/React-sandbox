@@ -1,14 +1,12 @@
 const fs = require('node:fs')
-const { getFolderConstruct } = require('../services/files.services')
+const { getFolderConstruct, getFolderContent } = require('../services/files.services')
 
 const getFiles = (req, res) => {
-    const actualPath = `./projects/${req.params.projectId}/src/app.jsx`
-    if(fs.existsSync(actualPath)) {
-        const content = fs.readFileSync(actualPath, 'utf-8')
-        res.status(201).send({
-            [actualPath]: content
-        })
-    }
+    const actualPath = `./projects/${req.params.projectId}`
+    const obj = {}
+    getFolderContent(obj, actualPath, '')
+    res.send(obj)  
+    
 }
 
 const createFolder = (req, res) => {
