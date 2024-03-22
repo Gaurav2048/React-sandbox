@@ -1,6 +1,12 @@
 import { Reducer } from "redux";
 
 export type ActionType = {
+    type: 'UPDATE_PROJECT_FILE',
+    payload: {
+        content: any,
+        filePath: string
+    }
+} | {
     type: 'GET_PROJECT',
     payload: {
         files: any
@@ -37,7 +43,12 @@ export const FileReducer: Reducer<FileStore, ActionType> = (state = initialStore
         return { ...state, project: action.payload };
       //else the current state is retained
       case 'GET_PROJECT_CONSTRUCT': 
-      return { ...state,  construct: action.payload}
+      return { ...state,  construct: action.payload};
+      case 'UPDATE_PROJECT_FILE': 
+      return { ...state, project: {
+        ...state.project,
+        [action.payload.filePath]: action.payload.content
+      } }
       default:
         return state;
     }

@@ -1,16 +1,18 @@
 import Editor from "@monaco-editor/react";
 
 type OwnProps = {
-    code: string
+    code: string;
+    onChangeCode: (code?: string) => void;
 }
 
-const CodeEditor: React.FC<OwnProps> = ({ code }) => {
-  
+const CodeEditor: React.FC<OwnProps> = ({ code, onChangeCode }) => {
+ 
   return (
     <Editor
       height="100vh"
       width="100%"
       language="javascript"
+      onChange={onChangeCode}
       theme="vs-dark"
       value={code}
       options={{

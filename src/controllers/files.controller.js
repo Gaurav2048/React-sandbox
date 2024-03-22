@@ -1,5 +1,5 @@
 const fs = require('node:fs')
-const { getFolderConstruct, getFolderContent } = require('../services/files.services')
+const { getFolderConstruct, getFolderContent, rewriteFile } = require('../services/files.services')
 
 const getFiles = (req, res) => {
     const actualPath = `./projects/${req.params.projectId}`
@@ -56,13 +56,25 @@ const createFile = (req, res) => {
 
 const getApplicationConstruct = async (req, res) => {
     const construct = {}
-    getFolderConstruct(construct, `./projects/${req.params.projectId}`)
+    getFolderConstruct(construct, `./projects/${req.params?.projectId}`)
     res.status(200).send(construct)
+}
+
+const updateFile = async (req, res) => {
+  const fileLocation = `./projects/${req.params?.projectId}/${req.body?.filePath}`
+  const content = req.body?.content
+  rewriteFile(fileLocation, content)
+  res?.status(200).send({
+    message: "File updated",
+    filePath: req.body.filePath,
+    content
+  })
 }
 
 module.exports = {
     createFile,
     createFolder,
     getFiles,
-    getApplicationConstruct
+    getApplicationConstruct,
+    updateFile
 }

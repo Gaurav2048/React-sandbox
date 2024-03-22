@@ -34,3 +34,20 @@ export const getConstruct: ApiActionFn = (projectId: string = DEFAULT_PROJECT_ID
        }
     }
 }
+
+
+export const updateFile: ApiActionFn = (projectId: string = DEFAULT_PROJECT_ID, code: string, filePath: string) => {
+    return {
+        type: 'CALL_API',
+        method: 'PUT',
+        url: `file/project/${projectId}`,
+        data: {
+            content: code, 
+            filePath
+        },
+       actions: {
+        success: 'UPDATE_PROJECT_FILE',
+        error: ''
+       }
+    }
+}

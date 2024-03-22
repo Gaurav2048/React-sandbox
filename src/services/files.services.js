@@ -43,7 +43,14 @@ const readFile = (path) => {
     }
 }
 
+const rewriteFile = (path, content) => {
+    fs.writeFileSync(path, '')
+    fs.writeFileSync(path, content)
+    return 
+}
+
 module.exports = {
     getFolderConstruct,
-    getFolderContent
+    getFolderContent,
+    rewriteFile
 }
