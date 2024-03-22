@@ -36,7 +36,7 @@ const FileContainer = styled.div<any> `
     align-items: center;
     gap: 4px;
     padding: 3px 0;
-    background: ${props => props.hover ? '#424242' : 'inherit'}
+    background: ${props => props.$hover ? '#424242' : 'inherit'}
 `
 
 const File: React.FC<OwnProps> = ({ name, path, onFileSelected }) => {
@@ -48,7 +48,7 @@ const File: React.FC<OwnProps> = ({ name, path, onFileSelected }) => {
         onFileSelected(path)
     }
 
-    return <FileContainer onClick={openFileAction} hover={hover} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+    return <FileContainer onClick={openFileAction} $hover={hover} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
         {IconComponent()}
         <Typography styles={fileCss}>{name}</Typography>
     </FileContainer>

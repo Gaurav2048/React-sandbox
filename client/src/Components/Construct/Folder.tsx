@@ -20,7 +20,7 @@ const FolderNameContainer = styled.div<any> `
     margin: 0;
     padding: 0;
     cursor: pointer;
-    background: ${props => props.hover ? '#424242' : 'inherit'}
+    background: ${props => props.$hover ? '#424242' : 'inherit'}
 `
 
 const Folder: React.FC<OwnProps> = ({ name, construct, path, onFileSelected }) => {
@@ -31,13 +31,13 @@ const Folder: React.FC<OwnProps> = ({ name, construct, path, onFileSelected }) =
     const [hover, setHover] = useState(false)
 
     return <div>
-        <FolderNameContainer onClick={toogleOpen} hover={hover} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+        <FolderNameContainer onClick={toogleOpen} $hover={hover} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             {!open ? <IoChevronForward /> : <IoChevronDown />}
             <Typography>{name}</Typography>
         </FolderNameContainer>
         {open ? <div style={{ paddingLeft: '10px' }}>
             {keys.map(key => {
-                return construct[key] === FILE_INDICATOR ? <File name={key} path={`${path}/${key}`} onFileSelected={onFileSelected} /> : <Folder path={`${path}/${key}`} name={key} construct={construct[key]} onFileSelected={onFileSelected}  />
+                return construct[key] === FILE_INDICATOR ? <File name={key} path={`${path}/${key}`} key={`${path}/${key}`} onFileSelected={onFileSelected} /> : <Folder path={`${path}/${key}`} key={`${path}/${key}`} name={key} construct={construct[key]} onFileSelected={onFileSelected}  />
             })}
         </div> : null}
     </div>

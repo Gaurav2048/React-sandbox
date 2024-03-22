@@ -44,9 +44,13 @@ const readFile = (path) => {
 }
 
 const rewriteFile = (path, content) => {
-    fs.writeFileSync(path, '')
-    fs.writeFileSync(path, content)
-    return 
+    try {
+        fs.writeFileSync(path, '')
+        fs.writeFileSync(path, content)
+        return 
+    } catch (e) {
+        console.log('from Update file', e.message);
+    }
 }
 
 module.exports = {

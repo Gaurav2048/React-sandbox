@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 import Navigators from './Navigators'
 import CodeEditor from '../../Components/CodeEditor'
 import { useDispatch, useSelector } from 'react-redux'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import _debounce from "lodash.debounce";
 import { DEFAULT_PROJECT_ID, updateFile } from '../../store/Actions/fileActions'
 
@@ -63,12 +63,17 @@ function ReactEditor() {
   const code = useMemo(() => {
     return project[`/${currentFile}`]
   }, [currentFile])
+
+  useEffect(() => {
+    console.log('currentFile', currentFile);
+  }, [currentFile])
   
   const handleFileSelected = (path: string) => {
+    alert(path)
     setCurrentFile(path)
   }
 
-  const updateFileInServer = async (incomingCode: string) => {
+  const updateFileInServer = async (incomingCode: string, currentFile: string) => {
     await dispatch<any>(updateFile(DEFAULT_PROJECT_ID, incomingCode, currentFile))
 }
 
@@ -77,7 +82,7 @@ function ReactEditor() {
   const handleCodeChanges = (inComingCode?: string) => {
     if (!inComingCode) return
    
-    debouncedUpdateServer(inComingCode)
+    debouncedUpdateServer(inComingCode, currentFile)
   }
   
   return (
@@ -89,7 +94,7 @@ function ReactEditor() {
         <CodeEditor code={code} onChangeCode={handleCodeChanges} />
       </CodeArea>
       <PreviewArea>
-        
+        <iframe width="100%" height="100%" style={{ background: 'white' }} src={`http://localhost:3000/v1/file/project/b9dd4ad5-5723-4bf0-bc42-944a5494348f/build`} ></iframe>
       </PreviewArea>
     </Container>
   )

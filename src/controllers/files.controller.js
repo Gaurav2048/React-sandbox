@@ -1,5 +1,6 @@
 const fs = require('node:fs')
 const { getFolderConstruct, getFolderContent, rewriteFile } = require('../services/files.services')
+const { buildProject } = require('../utils/installUtils')
 
 const getFiles = (req, res) => {
     const actualPath = `./projects/${req.params.projectId}`
@@ -7,6 +8,16 @@ const getFiles = (req, res) => {
     getFolderContent(obj, actualPath, '')
     res.send(obj)  
     
+}
+
+const getBuild = async (req, res) => {
+    const path = `./projects/${req?.params?.projectId}`
+    res.sendFile(`${path}/public/index.html`, { root: `${__dirname}/../../` })
+}
+
+const getJavaScript = async (req, res) => {
+    const path = `./projects/${req?.params?.projectId}`
+    res.sendFile(`${path}/public/index.js`, { root: `${__dirname}/../../` })
 }
 
 const createFolder = (req, res) => {
@@ -64,6 +75,8 @@ const updateFile = async (req, res) => {
   const fileLocation = `./projects/${req.params?.projectId}/${req.body?.filePath}`
   const content = req.body?.content
   rewriteFile(fileLocation, content)
+  await fs.unlinkSync(`./projects/${req.params?.projectId}/public/index.js`)
+  await buildProject(`./projects/${req.params?.projectId}`, 'src/index.jsx', 'public')
   res?.status(200).send({
     message: "File updated",
     filePath: req.body.filePath,
@@ -75,6 +88,8 @@ module.exports = {
     createFile,
     createFolder,
     getFiles,
+    getJavaScript,
     getApplicationConstruct,
+    getBuild,
     updateFile
 }

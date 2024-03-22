@@ -27,7 +27,7 @@ export const getConstruct: ApiActionFn = (projectId: string = DEFAULT_PROJECT_ID
     return {
         type: 'CALL_API',
         method: 'GET',
-        url: `file/project/${projectId}/construct`,
+        url: `file/construct/${projectId}`,
        actions: {
         success: 'GET_PROJECT_CONSTRUCT',
         error: ''
