@@ -27,16 +27,16 @@ const Container = styled.div `
   width: 100vw;
   hight: 100vh;
   display: flex;
-  border: 1px solid #ffffff;
+  border: 1px solid ${props => props.theme.colors.gray};
 `
 const Navigator = styled.div `
   width: 20vw;
   overflow: scroll;
-  border-right: 1px solid #ffffff;
+  border-right: 1px solid ${props => props.theme.colors.gray};
 `
 const CodeArea = styled.div `
   width: 40vw;
-  border-right: 1px solid #ffffff;
+  border-right: 1px solid ${props => props.theme.colors.gray};
 `
 
 const PreviewArea = styled.div `

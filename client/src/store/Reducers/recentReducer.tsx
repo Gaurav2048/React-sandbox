@@ -10,7 +10,7 @@ export type ActionType = {
 }
 
 const initialStore: RecentStore = {
-    files: {},
+    files: [],
     tabs: []
 }
 
@@ -24,6 +24,9 @@ export const RecentReducer: Reducer<RecentStore, ActionType> = (state = initialS
               if (!draft.tabs.find(tab => tab.path === action.payload.path)) {
                 draft.tabs.push({ ...action.payload })
               }
+              const filteredFiles = draft.files.filter(file => file.path !== action.payload.path)
+              filteredFiles.unshift(action.payload)
+              draft.files = filteredFiles
             //else the current state is retained
             
           }

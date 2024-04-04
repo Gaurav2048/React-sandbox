@@ -11,9 +11,7 @@ type OwnProps = {
 
 const Navigators: React.FC<OwnProps> = ({ onFileSelected }) => {
   const dispatch = useDispatch<any>()
-  const { project, construct } = useSelector((store: ReduxStore) => store.files)
-  console.log(project);
-  
+  const { project, construct } = useSelector((store: ReduxStore) => store.files)  
   
   useEffect(() => {
    fetchProject()

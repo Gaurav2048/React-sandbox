@@ -4,7 +4,7 @@ import { IoChevronForward, IoChevronDown } from "react-icons/io5";
 
 
 const CollapseContainer = styled.div `
-    border-top: 1px solid #c9c9c9;
+    border-top: 1px solid ${props => props.theme.colors.gray};
 `
 
 const CollapseHeader = styled.div `
