@@ -55,6 +55,13 @@ export const ENTENSION_TO_LANGUAGE = {
     json: 'json'
 }
 
+const LANGUAGES: any = {
+  "js": "javascript",
+  "html": "html",
+  "json": "json",
+  "jsx": "javascript",
+}
+
 function ReactEditor() {
   const { project } = useSelector((store: ReduxStore) => store.files)
   const [currentFile, setCurrentFile] = useState<string>('')
@@ -64,8 +71,10 @@ function ReactEditor() {
     return project[`/${currentFile}`]
   }, [currentFile])
 
-  useEffect(() => {
-    console.log('currentFile', currentFile);
+  const language = useMemo(() => {
+    const pathSplit = currentFile.split("/")
+    const [ _, ext ] = pathSplit[pathSplit.length - 1].split(".")
+    return LANGUAGES[ext]
   }, [currentFile])
   
   const handleFileSelected = (path: string) => {
@@ -90,7 +99,7 @@ function ReactEditor() {
         <Navigators onFileSelected={handleFileSelected} />
       </Navigator>
       <CodeArea>
-        <CodeEditor code={code} onChangeCode={handleCodeChanges} onFileSelected={handleFileSelected} />
+        <CodeEditor language={language} currentFile={currentFile} code={code} onChangeCode={handleCodeChanges} onFileSelected={handleFileSelected} />
       </CodeArea>
       <PreviewArea>
         <iframe width="100%" height="100%" style={{ background: 'white' }} src={`http://localhost:3000/v1/file/project/b9dd4ad5-5723-4bf0-bc42-944a5494348f/build`} ></iframe>

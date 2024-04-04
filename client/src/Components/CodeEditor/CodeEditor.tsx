@@ -5,17 +5,19 @@ type OwnProps = {
     code: string;
     onChangeCode: (code?: string) => void;
     onFileSelected: (path: string) => void;
+    language: string;
+    currentFile: string;
 }
 
-const CodeEditor: React.FC<OwnProps> = ({ code, onChangeCode, onFileSelected }) => {
+const CodeEditor: React.FC<OwnProps> = ({ code, currentFile, language, onChangeCode, onFileSelected }) => {
   
   return (
     <div>
-      <FileTabs onFileSelected={onFileSelected} />
+      <FileTabs currentFile={currentFile} onFileSelected={onFileSelected} />
       <Editor
         height="100vh"
         width="100%"
-        language="javascript"
+        language={language}
         onChange={onChangeCode}
         theme="vs-dark"
         value={code}
