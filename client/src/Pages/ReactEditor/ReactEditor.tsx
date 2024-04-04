@@ -69,7 +69,6 @@ function ReactEditor() {
   }, [currentFile])
   
   const handleFileSelected = (path: string) => {
-    alert(path)
     setCurrentFile(path)
   }
 
@@ -91,7 +90,7 @@ function ReactEditor() {
         <Navigators onFileSelected={handleFileSelected} />
       </Navigator>
       <CodeArea>
-        <CodeEditor code={code} onChangeCode={handleCodeChanges} />
+        <CodeEditor code={code} onChangeCode={handleCodeChanges} onFileSelected={handleFileSelected} />
       </CodeArea>
       <PreviewArea>
         <iframe width="100%" height="100%" style={{ background: 'white' }} src={`http://localhost:3000/v1/file/project/b9dd4ad5-5723-4bf0-bc42-944a5494348f/build`} ></iframe>

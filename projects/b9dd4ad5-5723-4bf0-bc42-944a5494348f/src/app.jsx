@@ -1,7 +1,12 @@
 import React from "react";
 
 let App = () => {
-    return <h1 style={{ color: 'blue' }}>{`Hello, world!111223343535345`}</h1>
+    return <div>
+         <h1 style={{ color: 'blue' }}>
+            this is a simple title 
+        </h1>
+        <button>This is a button</button>
+    </div>
 }
 
 export default App;

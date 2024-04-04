@@ -43,7 +43,12 @@ declare type FileStore = {
     construct: Record<string, any>,
 }
 
+declare type RecentStore = {
+  files: any,
+  tabs: Array<{ name: string, path: string }>,
+}
 
 declare type ReduxStore = {
-    files: FileStore
+    files: FileStore;
+    recent: RecentStore
 }

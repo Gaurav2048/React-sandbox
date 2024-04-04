@@ -44,7 +44,10 @@ const reduxMiddleware =
     const { type, actions, ...callApiFnProps } = action;
 
     if (type !== CALL_API) {
-      return next(action);
+      return next({
+        type: actions?.success,
+        payload: actions?.payload
+      });
     }
 
     return callApi(callApiFnProps)
