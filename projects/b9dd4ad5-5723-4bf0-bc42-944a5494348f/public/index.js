@@ -23514,7 +23514,7 @@
   // projects/b9dd4ad5-5723-4bf0-bc42-944a5494348f/src/app.jsx
   var import_react = __toESM(require_react());
   var App = () => {
-    return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h1", { style: { color: "blue" } }, "this is a simple title"), /* @__PURE__ */ import_react.default.createElement("button", null, "This is a button"));
+    return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h1", { style: { color: "blue" } }, "this is a simple title"), /* @__PURE__ */ import_react.default.createElement("button", null, "This is a button"), /* @__PURE__ */ import_react.default.createElement("ul", null, /* @__PURE__ */ import_react.default.createElement("li", null, "One"), /* @__PURE__ */ import_react.default.createElement("li", null, "Two"), /* @__PURE__ */ import_react.default.createElement("li", null, "Twhrwee")), /* @__PURE__ */ import_react.default.createElement("h1", null, "This is a next thing"));
   };
   var app_default = App;
 

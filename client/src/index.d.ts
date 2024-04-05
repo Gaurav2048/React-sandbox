@@ -41,6 +41,7 @@ declare type ReduxApiAction = {
 declare type FileStore = {
     project: Record<string, string>,
     construct: Record<string, any>,
+    refreshCount: number;
 }
 
 declare type RecentStore = {

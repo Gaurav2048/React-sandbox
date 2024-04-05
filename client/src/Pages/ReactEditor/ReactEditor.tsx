@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import _debounce from "lodash.debounce";
 import { DEFAULT_PROJECT_ID, updateFile } from '../../store/Actions/fileActions'
+import Iframe from '../../Components/Iframe'
 
 const obj = {
   "public": {
@@ -102,7 +103,7 @@ function ReactEditor() {
         <CodeEditor language={language} currentFile={currentFile} code={code} onChangeCode={handleCodeChanges} onFileSelected={handleFileSelected} />
       </CodeArea>
       <PreviewArea>
-        <iframe width="100%" height="100%" style={{ background: 'white' }} src={`http://localhost:3000/v1/file/project/b9dd4ad5-5723-4bf0-bc42-944a5494348f/build`} ></iframe>
+        <Iframe />
       </PreviewArea>
     </Container>
   )

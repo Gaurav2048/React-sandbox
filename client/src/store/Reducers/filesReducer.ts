@@ -31,7 +31,8 @@ export type ActionType = {
 
 const initialStore: FileStore = {
     project: {},
-    construct: {}
+    construct: {},
+    refreshCount: 0
 }
 
 export const FileReducer: Reducer<FileStore, ActionType> = (state = initialStore, action) => {
@@ -48,7 +49,7 @@ export const FileReducer: Reducer<FileStore, ActionType> = (state = initialStore
       return { ...state, project: {
         ...state.project,
         [action.payload.filePath]: action.payload.content
-      } }
+      }, refreshCount: state.refreshCount + 1 }
       default:
         return state;
     }

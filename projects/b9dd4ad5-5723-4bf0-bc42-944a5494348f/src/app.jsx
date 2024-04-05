@@ -6,6 +6,12 @@ let App = () => {
             this is a simple title 
         </h1>
         <button>This is a button</button>
+        <ul>
+            <li>One</li>
+            <li>Two</li>
+            <li>Twhrwee</li>
+        </ul>
+        <h1>This is a next thing</h1>
     </div>
 }
 
