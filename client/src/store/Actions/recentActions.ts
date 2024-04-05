@@ -10,3 +10,16 @@ export const addToTabs: ActionFn = (name: string, path: string) => {
        }
     }
 }
+
+export const removeTab: ActionFn = (name: string, path: string) => {
+    return {
+        type: '',
+       actions: {
+        success: 'REMOVE_FROM_TAB',
+        error: '',
+        payload: {
+            name, path
+        }
+       }
+    }
+}
