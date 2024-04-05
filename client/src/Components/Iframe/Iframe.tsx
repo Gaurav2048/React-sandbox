@@ -10,14 +10,11 @@ const IframeContainer = styled.div `
 const Iframe: React.FC = () => {
     const { refreshCount } = useSelector((store: ReduxStore) => store.files) 
     const iframeRef = useRef<HTMLIFrameElement | null>(null)
-    console.log("refreshCount ", refreshCount);
     
     useEffect(() => {
-        console.log(iframeRef.current?.contentDocument);
         
         if (!iframeRef?.current) return
         if (!iframeRef?.current?.contentDocument) return
-        console.log("reload started");
         
         iframeRef?.current?.contentDocument?.location?.reload()
     }, [refreshCount])

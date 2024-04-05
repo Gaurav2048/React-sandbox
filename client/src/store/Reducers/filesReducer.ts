@@ -4,7 +4,8 @@ export type ActionType = {
     type: 'UPDATE_PROJECT_FILE',
     payload: {
         content: any,
-        filePath: string
+        filePath: string,
+        data: any
     }
 } | {
     type: 'GET_PROJECT',
@@ -46,6 +47,7 @@ export const FileReducer: Reducer<FileStore, ActionType> = (state = initialStore
       case 'GET_PROJECT_CONSTRUCT': 
       return { ...state,  construct: action.payload};
       case 'UPDATE_PROJECT_FILE': 
+      
       return { ...state, project: {
         ...state.project,
         [action.payload.filePath]: action.payload.content

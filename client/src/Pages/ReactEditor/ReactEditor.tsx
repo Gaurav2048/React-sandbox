@@ -6,23 +6,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import _debounce from "lodash.debounce";
 import { DEFAULT_PROJECT_ID, updateFile } from '../../store/Actions/fileActions'
 import Iframe from '../../Components/Iframe'
-
-const obj = {
-  "public": {
-      "index.html": "",
-      "index.js": ""
-  },
-  "src": {
-      "app.jsx": "",
-      "components": {
-          "AppButton": {
-              "AppButton.jsx": "",
-              "index.jsx": ""
-          }
-      },
-      "index.jsx": ""
-  }
-}
+import * as prettier from "prettier";
+import * as babel from "prettier/parser-babel";
+import * as esTree from 'prettier/plugins/estree'
 
 const Container = styled.div `
   width: 100vw;
@@ -64,13 +50,13 @@ const LANGUAGES: any = {
 }
 
 function ReactEditor() {
-  const { project } = useSelector((store: ReduxStore) => store.files)
+  const { files } = useSelector((store: ReduxStore) => store)
   const [currentFile, setCurrentFile] = useState<string>('')
   const dispatch = useDispatch()
-
+  const { project } = files
   const code = useMemo(() => {
     return project[`/${currentFile}`]
-  }, [currentFile])
+  }, [currentFile, files, project])
 
   const language = useMemo(() => {
     const pathSplit = currentFile.split("/")
@@ -83,7 +69,12 @@ function ReactEditor() {
   }
 
   const updateFileInServer = async (incomingCode: string, currentFile: string) => {
-    await dispatch<any>(updateFile(DEFAULT_PROJECT_ID, incomingCode, currentFile))
+    try {
+      const formattedIncomingCode = await prettier.format(incomingCode, { semi: false, tabWidth: 2, parser: "babel", plugins: [babel, esTree] });
+      await dispatch<any>(updateFile(DEFAULT_PROJECT_ID, formattedIncomingCode, currentFile)) 
+     } catch (e: any) {
+      alert(e.message)
+     }
 }
 
   const debouncedUpdateServer = useCallback(_debounce(updateFileInServer, DELAY_IN_REQUEST_MS), [])
