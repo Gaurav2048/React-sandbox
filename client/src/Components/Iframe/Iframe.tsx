@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { styled } from "styled-components";
+import { Tab, Tabs } from "../CodeEditor/FileTabs";
+import { IoIosClose } from "react-icons/io";
 
 const IframeContainer = styled.div `
     width: 100%;
@@ -20,6 +22,7 @@ const Iframe: React.FC = () => {
     }, [refreshCount])
 
     return <IframeContainer>
+        <WindowTabs />
         <iframe 
             ref={iframeRef}
             width="100%" 
@@ -32,3 +35,14 @@ const Iframe: React.FC = () => {
 }
 
 export default Iframe;
+
+const WindowTabs: React.FC = () => {
+    return <Tabs>
+    <Tab>
+        Preview
+        <div className="close">
+            <IoIosClose />
+        </div>
+    </Tab>
+</Tabs>
+}

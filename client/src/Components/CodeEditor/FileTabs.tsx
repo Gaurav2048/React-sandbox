@@ -9,7 +9,7 @@ import Typography from '../Typography';
 import useExtension from '../../hooks/useExtension';
 import { removeTab } from '../../store/Actions/recentActions';
 
-const Tab = styled.div<any> `
+export const Tab = styled.div<any> `
     display: flex;
     align-items: center;
     gap: 24px;
@@ -40,7 +40,7 @@ const Tab = styled.div<any> `
     }
 `
 
-const Tabs = styled.div `
+export const Tabs = styled.div `
     display: flex;
     width: 100%;
     border-bottom: 1px solid ${props => props.theme.colors.gray};
