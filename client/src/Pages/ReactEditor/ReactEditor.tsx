@@ -9,6 +9,7 @@ import Iframe from '../../Components/Iframe'
 import * as prettier from "prettier";
 import * as babel from "prettier/parser-babel";
 import * as esTree from 'prettier/plugins/estree'
+import Layout from '../../Components/Layout'
 
 const Container = styled.div `
   width: 100vw;
@@ -86,17 +87,19 @@ function ReactEditor() {
   }
   
   return (
-    <Container>
-      <Navigator>
-        <Navigators onFileSelected={handleFileSelected} />
-      </Navigator>
-      <CodeArea>
-        <CodeEditor language={language} currentFile={currentFile} code={code} onChangeCode={handleCodeChanges} onFileSelected={handleFileSelected} />
-      </CodeArea>
-      <PreviewArea>
-        <Iframe />
-      </PreviewArea>
-    </Container>
+    <Layout>
+      <Container>
+        <Navigator>
+          <Navigators onFileSelected={handleFileSelected} />
+        </Navigator>
+        <CodeArea>
+          <CodeEditor language={language} currentFile={currentFile} code={code} onChangeCode={handleCodeChanges} onFileSelected={handleFileSelected} />
+        </CodeArea>
+        <PreviewArea>
+          <Iframe />
+        </PreviewArea>
+      </Container>
+    </Layout>
   )
 }
 
