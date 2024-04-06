@@ -10,12 +10,13 @@ import * as prettier from "prettier";
 import * as babel from "prettier/parser-babel";
 import * as esTree from 'prettier/plugins/estree'
 import Layout from '../../Components/Layout'
+import Draggable from '../../Draggable'
 
 const Container = styled.div `
   width: 100vw;
   hight: 100vh;
   display: flex;
-  border: 1px solid ${props => props.theme.colors.gray};
+  
 `
 const Navigator = styled.div `
   width: 20vw;
@@ -24,11 +25,13 @@ const Navigator = styled.div `
 `
 const CodeArea = styled.div `
   width: 40vw;
+  height: calc(100vh - 84px);
   border-right: 1px solid ${props => props.theme.colors.gray};
 `
 
 const PreviewArea = styled.div `
   width: 40vw;
+  height: calc(100vh - 84px);
 `
 
 export const DELAY_IN_REQUEST_MS = 3000
@@ -92,12 +95,16 @@ function ReactEditor() {
         <Navigator>
           <Navigators onFileSelected={handleFileSelected} />
         </Navigator>
-        <CodeArea>
-          <CodeEditor language={language} currentFile={currentFile} code={code} onChangeCode={handleCodeChanges} onFileSelected={handleFileSelected} />
-        </CodeArea>
-        <PreviewArea>
-          <Iframe />
-        </PreviewArea>
+        <Draggable>
+          <CodeArea>
+            <CodeEditor language={language} currentFile={currentFile} code={code} onChangeCode={handleCodeChanges} onFileSelected={handleFileSelected} />
+          </CodeArea>
+        </Draggable>
+        <Draggable>
+          <PreviewArea>
+            <Iframe />
+          </PreviewArea>
+        </Draggable>
       </Container>
     </Layout>
   )

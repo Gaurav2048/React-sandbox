@@ -24,7 +24,6 @@ const CollapseHeader = styled.div `
 const CollapseBody = styled.div `
     max-height: 300px;
     overflow: scroll;
-    background: #1f1f1f;
     padding: 4px 0 4px 12px;
 `
 

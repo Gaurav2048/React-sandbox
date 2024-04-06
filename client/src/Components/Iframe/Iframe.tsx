@@ -30,7 +30,7 @@ const Iframe: React.FC = () => {
             key={refreshCount} 
             style={{ background: 'white' }} 
             src={`http://localhost:3000/v1/file/project/b9dd4ad5-5723-4bf0-bc42-944a5494348f/build`} 
-            ></iframe>
+        ></iframe>
     </IframeContainer>
 }
 
