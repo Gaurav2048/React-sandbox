@@ -1,1 +1,4 @@
-{"id":{"name":"name"},"b9dd4ad5-5723-4bf0-bc42-944a5494348f":{"name":"First React"}}
+{
+  "id": { "name": "name" },
+  "b9dd4ad5-5723-4bf0-bc42-944a5494348f": { "name": "First React" }
+}

@@ -1,12 +1,8 @@
-import './App.css'
-import ReactEditor from './Pages/ReactEditor'
+import "./App.css";
+import ReactEditor from "./Pages/ReactEditor";
 
 function App() {
-  
-
-  return (
-    <ReactEditor />
-  )
+  return <ReactEditor />;
 }
 
-export default App
+export default App;

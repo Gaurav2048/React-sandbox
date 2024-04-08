@@ -1,7 +1,11 @@
-import { applyMiddleware, compose, legacy_createStore as createStore } from 'redux';
+import {
+  applyMiddleware,
+  compose,
+  legacy_createStore as createStore,
+} from "redux";
 
-import reduxMiddleware from '../config/AxiosConfig';
-import rootReducer from './Reducers';
+import reduxMiddleware from "../config/AxiosConfig";
+import rootReducer from "./Reducers";
 
 const middleware: any = [reduxMiddleware];
 const { NODE_ENV } = import.meta.env;
@@ -13,8 +17,8 @@ declare global {
 }
 
 const composeEnhancers =
-  NODE_ENV !== 'production' &&
-  typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function'
+  NODE_ENV !== "production" &&
+  typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === "function"
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     : compose;
 

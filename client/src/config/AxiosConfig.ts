@@ -1,20 +1,20 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from "axios";
 // import cookieFns from 'js-cookie';
 
-import { Dispatch } from 'redux';
+import { Dispatch } from "redux";
 // import { setupCache } from 'axios-cache-adapter';
 // import { snakeCase } from 'snake-case';
 // import { stringify } from 'query-string';
 // import { toast } from 'react-toastify';
 const {
   NODE_ENV,
-  REACT_APP_BACKEND_URL_BASE = '',
-  REACT_APP_BACKEND_URL_POSTFIX = '',
+  REACT_APP_BACKEND_URL_BASE = "",
+  REACT_APP_BACKEND_URL_POSTFIX = "",
   REACT_APP_COOKIE_DOMAIN,
 } = import.meta.env;
 
-export const backendBaseUrl = 'http://localhost:3000/v1/';
-  
+export const backendBaseUrl = "http://localhost:3000/v1/";
+
 // const cache = setupCache({
 //   maxAge: 15 * 60 * 1000, // 15 mins
 // });
@@ -22,7 +22,7 @@ export const backendBaseUrl = 'http://localhost:3000/v1/';
 const axiosInstance = axios.create({
   baseURL: backendBaseUrl,
   timeout: 30000,
-//   adapter: cache.adapter,
+  //   adapter: cache.adapter,
   withCredentials: true,
 });
 
@@ -35,7 +35,7 @@ const axiosRequest = (props: AxiosRequestConfig) => {
     });
 };
 
-const CALL_API = 'CALL_API';
+const CALL_API = "CALL_API";
 
 const reduxMiddleware =
   () =>
@@ -46,7 +46,7 @@ const reduxMiddleware =
     if (type !== CALL_API) {
       return next({
         type: actions?.success,
-        payload: actions?.payload
+        payload: actions?.payload,
       });
     }
 
@@ -55,7 +55,7 @@ const reduxMiddleware =
         if (actions) {
           return next({
             type: actions?.success,
-            ... data
+            ...data,
           });
         }
         return data;
@@ -84,7 +84,7 @@ export const callApi: CallApi = (action) => {
   } = action;
 
   const mandatoryHeaders: Record<string, string> = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
 
   /* --------------------------- Header Modification -------------------------- */
@@ -92,7 +92,7 @@ export const callApi: CallApi = (action) => {
   const requestHeaders: Record<string, string> = {
     ...mandatoryHeaders,
 
-    'x-access-token': localStorage.getItem('token') || '',
+    "x-access-token": localStorage.getItem("token") || "",
   };
 
   /* ---------------------------- URL Modification ---------------------------- */
@@ -118,24 +118,24 @@ export const callApi: CallApi = (action) => {
     },
     (err) => {
       if (err?.response?.status === 401) {
-        if (NODE_ENV !== 'production') {
-        //   toast.error(`ACCESS DENIED ${axiosRequestConfig.url}`);
+        if (NODE_ENV !== "production") {
+          //   toast.error(`ACCESS DENIED ${axiosRequestConfig.url}`);
         }
         window.location.reload();
       } else if (err?.response?.status === 500) {
-        if (NODE_ENV !== 'production') {
-        //   toast.error(
-        //     `Looks like there is some technical difficulties fetching the resources ${axiosRequestConfig.url}`,
-        //   );
+        if (NODE_ENV !== "production") {
+          //   toast.error(
+          //     `Looks like there is some technical difficulties fetching the resources ${axiosRequestConfig.url}`,
+          //   );
         }
       } else if (err?.response?.status === 403) {
-        if (NODE_ENV !== 'production') {
-        //   toast.error(`FORBIDDEN ${axiosRequestConfig.url}`);
+        if (NODE_ENV !== "production") {
+          //   toast.error(`FORBIDDEN ${axiosRequestConfig.url}`);
         }
       }
 
       if (axios.isCancel(err)) {
-        throw { error: { status: 'cancel' }, response: err };
+        throw { error: { status: "cancel" }, response: err };
       }
 
       // throw {
@@ -143,6 +143,6 @@ export const callApi: CallApi = (action) => {
       //   status: err?.response?.status || 'UNKNOWN',
       // };
       throw err?.response?.data || err?.response;
-    },
+    }
   );
 };

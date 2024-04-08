@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
 let App = () => {
-  const items = ["first", "second", "third"]
+  const items = ["first", "second", "third"];
   return (
     <div>
       <h1 style={{ color: "blue" }}>this is a simple title</h1>
@@ -16,7 +16,7 @@ let App = () => {
       ))}
       <h1>This is a next thing</h1>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

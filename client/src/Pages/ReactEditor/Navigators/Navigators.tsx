@@ -6,30 +6,34 @@ import Dependencies from "./Dependencies";
 import AppCollapse from "../../../Components/AppCollapse";
 
 type OwnProps = {
-    onFileSelected: (path: string) => void;
-}
+  onFileSelected: (path: string) => void;
+};
 
 const Navigators: React.FC<OwnProps> = ({ onFileSelected }) => {
-  const dispatch = useDispatch<any>()
-  const { project, construct } = useSelector((store: ReduxStore) => store.files)  
-  
+  const dispatch = useDispatch<any>();
+  const { project, construct } = useSelector(
+    (store: ReduxStore) => store.files
+  );
+
   useEffect(() => {
-   fetchProject()
-  }, [])
+    fetchProject();
+  }, []);
 
   const fetchProject = async () => {
-    await dispatch(getProject("b9dd4ad5-5723-4bf0-bc42-944a5494348f"))
-    await dispatch(getConstruct())
-  }
+    await dispatch(getProject("b9dd4ad5-5723-4bf0-bc42-944a5494348f"));
+    await dispatch(getConstruct());
+  };
 
-    return <div>
-        <AppCollapse title="SANDBOX" defaultOpen>
-            <Construct construct={construct} onFileSelected={onFileSelected} />
-        </AppCollapse>
-        <AppCollapse title="DEPENDENCIES">
-            <Dependencies />
-        </AppCollapse>
+  return (
+    <div>
+      <AppCollapse title="SANDBOX" defaultOpen>
+        <Construct construct={construct} onFileSelected={onFileSelected} />
+      </AppCollapse>
+      <AppCollapse title="DEPENDENCIES">
+        <Dependencies />
+      </AppCollapse>
     </div>
-}
+  );
+};
 
 export default Navigators;
