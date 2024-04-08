@@ -3,7 +3,7 @@ import { FILE_INDICATOR } from "./Construct";
 import File from "./File";
 import { IoChevronForward, IoChevronDown } from "react-icons/io5";
 import Typography from "../Typography";
-import { styled } from "styled-components";
+import { styled, useTheme } from "styled-components";
 
 
 type OwnProps = {
@@ -51,11 +51,12 @@ const Folder: React.FC<OwnProps> = ({ name, construct, path, onFileSelected }) =
 
     const toogleOpen = () => setOpen(!open)
     const [hover, setHover] = useState(false)
+    const theme = useTheme()
 
     return <div>
         <FolderNameContainer onClick={toogleOpen} $hover={hover} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             {!open ? <IoChevronForward /> : <IoChevronDown />}
-            <Typography>{name}</Typography>
+            <Typography color={theme.colors.text.gray}>{name}</Typography>
         </FolderNameContainer>
         {open ? <Collapse>
             {keys.map(key => {

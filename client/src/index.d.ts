@@ -47,6 +47,7 @@ declare type FileStore = {
 declare type RecentStore = {
   files: Array<{ name: string, path: string }>,
   tabs: Array<{ name: string, path: string }>,
+  currentFile: string,
 }
 
 declare type ReduxStore = {

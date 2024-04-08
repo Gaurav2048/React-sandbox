@@ -4,25 +4,29 @@ import { IoChevronForward, IoChevronDown } from "react-icons/io5";
 
 
 const CollapseContainer = styled.div `
+    width: 100%;
     border-top: 1px solid ${props => props.theme.colors.gray};
 `
 
 const CollapseHeader = styled.div `
+    width: 100% !important;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2px 0;
+    border-bottom: 1px solid ${props => props.theme.colors.gray};
 
     .header {
         display: flex;
         align-items: center;
         font-size: 16px;
         gap: 4px;
+        border: none;
     }
 `
 
 const CollapseBody = styled.div `
-    max-height: 300px;
+    min-height: 400px;
     overflow: scroll;
     padding: 4px 0 4px 12px;
 `

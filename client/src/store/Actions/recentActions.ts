@@ -23,3 +23,16 @@ export const removeTab: ActionFn = (name: string, path: string) => {
        }
     }
 }
+
+export const addCurrentFile: ActionFn = (file: string) => {
+    return {
+        type: '',
+       actions: {
+        success: 'SET_CURRENT_FILE',
+        error: '',
+        payload: {
+            file
+        }
+       }
+    }
+}

@@ -13,11 +13,17 @@ export type ActionType = {
         name: string;
         path: string;
     }
+} | {
+    type: 'SET_CURRENT_FILE',
+    payload: {
+        file: string
+    }
 }
 
 const initialStore: RecentStore = {
     files: [],
-    tabs: []
+    tabs: [],
+    currentFile: ''
 }
 
 export const RecentReducer: Reducer<RecentStore, ActionType> = (state = initialStore, action) => {
@@ -38,6 +44,10 @@ export const RecentReducer: Reducer<RecentStore, ActionType> = (state = initialS
             //else the current state is retained
             case 'REMOVE_FROM_TAB': 
               draft.tabs = draft.tabs.filter(tab => tab.path !== action.payload.path)
+              return draft
+
+            case 'SET_CURRENT_FILE': 
+              draft.currentFile = action.payload.file
               return draft
         }
 

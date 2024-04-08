@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Typography from "../Typography";
-import { styled } from "styled-components";
+import { styled, useTheme } from "styled-components";
 import { useDispatch } from "react-redux";
 import { addToTabs } from "../../store/Actions/recentActions";
 import useExtension from "../../hooks/useExtension";
@@ -31,6 +31,7 @@ const File: React.FC<OwnProps> = ({ name, path, onFileSelected }) => {
     const [hover, setHover] = useState(false)
     const dispatch = useDispatch()
     const IconComponent = useExtension(name)
+    const theme = useTheme()
 
     const openFileAction = async () => {
         await dispatch(addToTabs(name, path))
@@ -39,7 +40,7 @@ const File: React.FC<OwnProps> = ({ name, path, onFileSelected }) => {
 
     return <FileContainer onClick={openFileAction} $hover={hover} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
         {IconComponent()}
-        <Typography styles={fileCss}>{name}</Typography>
+        <Typography color={theme.colors.text.gray}  styles={fileCss}>{name}</Typography>
     </FileContainer>
 }
 

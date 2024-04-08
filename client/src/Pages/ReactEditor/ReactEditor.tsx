@@ -11,6 +11,7 @@ import * as babel from "prettier/parser-babel";
 import * as esTree from 'prettier/plugins/estree'
 import Layout from '../../Components/Layout'
 import Draggable from '../../Draggable'
+import { addCurrentFile } from '../../store/Actions/recentActions'
 
 const Container = styled.div `
   width: 100vw;
@@ -55,7 +56,7 @@ const LANGUAGES: any = {
 
 function ReactEditor() {
   const { files } = useSelector((store: ReduxStore) => store)
-  const [currentFile, setCurrentFile] = useState<string>('')
+  const currentFile = useSelector((store: ReduxStore) => store.recent.currentFile)  
   const dispatch = useDispatch()
   const { project } = files
   const code = useMemo(() => {
@@ -68,8 +69,8 @@ function ReactEditor() {
     return LANGUAGES[ext]
   }, [currentFile])
   
-  const handleFileSelected = (path: string) => {
-    setCurrentFile(path)
+  const handleFileSelected = async (path: string) => {
+    await dispatch(addCurrentFile(path))
   }
 
   const updateFileInServer = async (incomingCode: string, currentFile: string) => {
